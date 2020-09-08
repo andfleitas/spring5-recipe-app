@@ -35,13 +35,16 @@ public class Recipe {
     private String url;
 
     @Lob
+    private String directions;
+
+    @Lob
     private byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
@@ -51,6 +54,9 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    public Recipe() {
+    }
 
     /**
      * Getter of property 'id'.
@@ -183,6 +189,25 @@ public class Recipe {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * Getter of property 'directions'.
+     *
+     * @return value of directions
+     */
+    public String getDirections() {
+        return directions;
+    }
+
+    /**
+     * Setter for property 'directions'.
+     *
+     * @param directions
+     *         value of directions
+     */
+    public void setDirections(String directions) {
+        this.directions = directions;
     }
 
     /**
