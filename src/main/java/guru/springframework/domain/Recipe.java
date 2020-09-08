@@ -246,6 +246,7 @@ public class Recipe {
      */
     public void setNotes(Notes notes) {
         this.notes = notes;
+        notes.setRecipe(this);
     }
 
     /**
@@ -265,6 +266,17 @@ public class Recipe {
      */
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    /**
+     * Helper method to associate the Ingredients to the recipe
+     * @param ingredient {@link Ingredient} to associate
+     * @return this instance of {@link Recipe}
+     */
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
 
     /**
