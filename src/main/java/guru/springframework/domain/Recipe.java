@@ -3,6 +3,8 @@ package guru.springframework.domain;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +37,9 @@ public class Recipe {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
+
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
     /**
      * Getter of property 'id'.
@@ -224,5 +229,24 @@ public class Recipe {
      */
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    /**
+     * Getter of property 'difficulty'.
+     *
+     * @return value of difficulty
+     */
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * Setter for property 'difficulty'.
+     *
+     * @param difficulty
+     *         value of difficulty
+     */
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
