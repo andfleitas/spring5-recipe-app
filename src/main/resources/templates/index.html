@@ -5,6 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-    <h1 th:text="'Welcome to the Index page!!!!'">Welcome</h1>
+    <h1 th:text="'List of Recipes'">Welcome</h1>
+
+    <table id="recipes" class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 150px;">ID</th>
+            <th style="width: 150px;">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="recipe : ${recipes}">
+            <td th:text="${recipe.id}">123</td>
+            <td th:text="${recipe.description}">Pizza</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
