@@ -38,7 +38,7 @@ public class RecipeControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
 
         Mockito.when(recipeService.findById(1L)).thenReturn(recipe);
-        mockMvc.perform(get("/recipe/show/1"))
+        mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("recipe"));
