@@ -65,8 +65,10 @@ public class Recipe {
      *         value of notes
      */
     public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this);
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     /**
