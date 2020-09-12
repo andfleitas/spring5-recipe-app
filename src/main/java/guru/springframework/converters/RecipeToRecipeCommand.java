@@ -9,12 +9,25 @@ import lombok.Synchronized;
 
 /**
  * Utility converter class for Recipe to recipe command.
+ *
  * @author andres
  */
 @Component
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
-    private final IngredientToIngredientCommand ingredientConverter;
-    private final CategoryToCategoryCommand categoryConverter;
+    /**
+     * The Ingredient converter.
+     */
+    final IngredientToIngredientCommand ingredientConverter;
+
+    /**
+     * The Category converter.
+     */
+    final CategoryToCategoryCommand categoryConverter;
+
+    /**
+     * The Notes converter.
+     */
+    final NotesToNotesCommand notesConverter;
 
     /**
      * Instantiates a new Recipe to recipe command.
@@ -23,11 +36,14 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
      *         the ingredient converter
      * @param categoryConverter
      *         the category converter
+     * @param notesConverter
+     *         the notes converter
      */
     public RecipeToRecipeCommand(IngredientToIngredientCommand ingredientConverter,
-                                 CategoryToCategoryCommand categoryConverter) {
+                                 CategoryToCategoryCommand categoryConverter, NotesToNotesCommand notesConverter) {
         this.ingredientConverter = ingredientConverter;
         this.categoryConverter = categoryConverter;
+        this.notesConverter = notesConverter;
     }
 
     @Nullable
@@ -47,6 +63,8 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand> {
         recipeCommand.setServings(recipe.getServings());
         recipeCommand.setCookTime(recipe.getCookTime());
         recipeCommand.setPrepTime(recipe.getPrepTime());
+        recipeCommand.setDifficulty(recipe.getDifficulty());
+        recipeCommand.setNotes(notesConverter.convert(recipe.getNotes()));
 
         if (recipe.getCategories() != null
                 && !recipe.getCategories().isEmpty()) {
