@@ -53,7 +53,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Set<Recipe> getRecipes() {
-        log.info("retrieving the recipes");
+        log.debug("retrieving the recipes");
         Set<Recipe> recipes = new HashSet<>();
         recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
         return recipes;
@@ -61,8 +61,14 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe findById(Long id) {
-        log.info("searching for recipe by id: " + id);
+        log.debug("searching for recipe by id: " + id);
         return recipeRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        log.debug("deleting recipe by id:" + id);
+        recipeRepository.deleteById(id);
     }
 
     @Override

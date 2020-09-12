@@ -22,6 +22,12 @@ public interface RecipeService {
      */
     Recipe findById(Long id);
 
+    /**
+     * Deletes a {@link Recipe} by a given Id value
+     * @param id    {@link Long} value of the {@link Recipe} to delete
+     */
+    void deleteById(Long id);
+
     RecipeCommand findCommandById(Long id);
 
     RecipeCommand saveRecipeCommand(RecipeCommand command);
