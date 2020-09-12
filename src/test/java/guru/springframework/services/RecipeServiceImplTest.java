@@ -1,11 +1,15 @@
 package guru.springframework.services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,5 +50,30 @@ public class RecipeServiceImplTest {
 
         assertEquals(1, recipes.size());
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void findRecipeByIdTest() {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.findById(1L)).thenReturn(Optional.of(recipe));
+
+        Recipe byId = recipeService.findById(1L);
+        assertNotNull(byId);
+        verify(recipeRepository, times(1)).findById(anyLong());
+
+    }
+    @Test
+    public void findRecipeByIdTestNotFound() {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.findById(1L)).thenReturn(Optional.of(recipe));
+
+        Recipe byId = recipeService.findById(2L);
+        assertNull(byId);
+        verify(recipeRepository, times(1)).findById(anyLong());
+
     }
 }
