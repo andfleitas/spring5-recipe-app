@@ -15,6 +15,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
+ * The type Ingredient.
+ *
  * @author andres
  */
 @Data
@@ -35,10 +37,45 @@ public class Ingredient {
     @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure unitOfMeasure;
 
+    /**
+     * Instantiates a new Ingredient.
+     */
+    public Ingredient() {
+    }
+
+    /**
+     * Instantiates a new Ingredient.
+     *
+     * @param description
+     *         the description
+     * @param amount
+     *         the amount
+     * @param unitOfMeasure
+     *         the unit of measure
+     */
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    /**
+     * Instantiates a new Ingredient.
+     *
+     * @param description
+     *         the description
+     * @param amount
+     *         the amount
+     * @param unitOfMeasure
+     *         the unit of measure
+     * @param recipe
+     *         the recipe
+     */
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.unitOfMeasure = unitOfMeasure;
+        this.recipe = recipe;
     }
 
 }
