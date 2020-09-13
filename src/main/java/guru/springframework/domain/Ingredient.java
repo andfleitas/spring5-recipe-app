@@ -19,7 +19,8 @@ import lombok.ToString;
  *
  * @author andres
  */
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
