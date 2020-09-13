@@ -38,7 +38,7 @@ public class Recipe {
     private String directions;
 
     @Lob
-    private byte[] image;
+    private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
