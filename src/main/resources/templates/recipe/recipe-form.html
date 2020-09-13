@@ -67,7 +67,13 @@
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <label>Difficulty:</label>
-                                        <select class="form-control">
+                                        <select class="form-control" th:field="*{difficulty}">
+                                            <option th:each="difficultyValue : ${T(guru.springframework.domain.Difficulty).values()}"
+                                                    th:value="${difficultyValue.name()}"
+                                                    th:text="${difficultyValue.name()}"
+                                            >val</option>
+                                        </select>
+                                        <select class="form-control" th:remove="all">
                                             <option>Easy</option>
                                             <option>Medium</option>
                                             <option>Hard</option>
@@ -93,10 +99,10 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <div class="row">
-                                    <div class="col-md-11 ">
+                                    <div class="col-md-10">
                                         <h1 class="panel-title">Ingredients</h1>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2 text-right">
                                         <a class="btn btn-default" href="#" role="button">Edit</a>
                                     </div>
                                 </div>
