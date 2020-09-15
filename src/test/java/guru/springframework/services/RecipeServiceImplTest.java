@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
+import guru.springframework.exceptions.NotFoundException;
 import guru.springframework.repositories.RecipeRepository;
 
 public class RecipeServiceImplTest {
@@ -74,17 +75,17 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findById(anyLong());
 
     }
-    @Test
-    public void findRecipeByIdTestNotFound() {
-        Recipe recipe = new Recipe();
-        recipe.setId(1L);
 
-        when(recipeRepository.findById(1L)).thenReturn(Optional.of(recipe));
+    @Test(expected = NotFoundException.class)
+    public void findRecipeByIdTestNotFound() throws Exception {
 
-        Recipe byId = recipeService.findById(2L);
-        assertNull(byId);
-        verify(recipeRepository, times(1)).findById(anyLong());
+        Optional<Recipe> recipeOptional = Optional.empty();
 
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
+
+        //should go boom
     }
 
     @Test
